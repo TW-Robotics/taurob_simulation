@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <arg name="outdoor"   default="true"/>
+  <arg name="gui"       default="false"/>
+  <arg name="gpu"       default="false"/>
+
+  <!-- Start Gazebo -->
+  <group if="$(arg outdoor)">
+    <arg name="path_to_world"     default="$(find taurob_tracker_gazebo)/worlds/Outdoor_Worlds/small.world"/>
+    <include file="$(find taurob_tracker_gazebo)/launch/taurob_tracker_outdoor_world.launch">
+      <arg name="world_name2" value="$(arg path_to_world)"/>
+      <arg name="gui" value="$(arg gui)"/>
+      <arg name="gpu" value="$(arg gpu)"/>
+    </include>
+  </group>
+  <group unless="$(arg outdoor)">
+    <arg name="path_to_world"     default="$(find taurob_tracker_gazebo)/worlds/Indoor_Worlds/fhtw.world"/>
+    <include file="$(find taurob_tracker_gazebo)/launch/taurob_tracker_indoor_world.launch">
+      <arg name="world_name2" value="$(arg path_to_world)"/>
+      <arg name="gui" value="$(arg gui)"/>
+      <arg name="gpu" value="$(arg gpu)"/>
+    </include>
+  </group>
+
+  <!-- Start Controller -->
+  <include file="$(find taurob_tracker_control)/launch/taurob_tracker_control.launch"/>
+  <!--Start Teleop -->
+  <node name="taurob_teleop_node" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" launch-prefix="xterm -e">
+    <remap from="/cmd_vel" to="/taurob_tracker/cmd_vel_raw" />
+  </node>
+  <!-- Start Rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find taurob_tracker_bringup)/launch/default.rviz"/>
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="realsense_depth" args="0 0 0 -1.57 0 -1.57 /realsense_rgbd_link /realsense_rgbd_depth_optical_frame" />
+
+</launch>
