@@ -18,7 +18,7 @@ There are 2 ways to build it:
     cd .. && catkin_make
 
     ```
-    2. Copy the [files](./files/taurob_tracker_simulation) to your catkin_ws/src
+    2. Copy the [files](./install/taurob_tracker_simulation) to your catkin_ws/src
     `cd catkin_ws && catkin_make`
 2. Use Docker:
     1. Execute the [build.sh](./build.sh) script (set arguments in file if needed)
