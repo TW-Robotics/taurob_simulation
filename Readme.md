@@ -5,7 +5,13 @@ This repository contains files necessary to simulate the S&R robot of the UAS Te
 <img align="center" width=300  src="./Robbie_clean.png" />
 
 For more about the S&R project see: [Design and Implementation of a Mobile Search and Rescue Robot](https://diglib.tugraz.at/download.php?id=5f6b0645e51ff&location=datacite)
-`@inProceedings{Novotny2020, author= {{Novotny, Georg} and {Kubinger, Wilfried}}, title= {Design and Implementation of a Mobile Search and Rescue Robot}, year= {2020}, doi= {10.3217/978-3-85125-752-6-06}, publisher= {Verlag der Technischen Universität Graz}}`
+```
+@inProceedings{Novotny2020, 
+	author= {{Novotny, Georg} and {Kubinger, Wilfried}}, 
+	title= {Design and Implementation of a Mobile Search and Rescue Robot}, 
+	year= {2020}, doi= {10.3217/978-3-85125-752-6-06}, 
+	publisher= {Verlag der Technischen Universität Graz}}
+```
 
 
 There are 2 ways to build it:
