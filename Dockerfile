@@ -3,7 +3,7 @@ ARG VERSION
 FROM georgno/fhtw-ros:${ROS_DISTRO}${VERSION}
 ARG CUDA
 ENV USERNAME fhtw_user
-RUN echo "CUDA   ${CUDA}" && sleep 5
+RUN echo "CUDA:   ${CUDA}" && sleep 5
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -34,15 +34,10 @@ RUN mkdir -p /home/$USERNAME/.gazebo/models && git clone https://github.com/osrf
 
 
 # # Upgrade GAZEBO to support RAY-GPU
-# RUN sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/gazebo-stable.list'
-# RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D2486D2DD83DB69272AFE98867170598AF249743
-# RUN sudo apt update 
-# RUN sudo apt-get --only-upgrade install -y gazebo9 gazebo9-common libgazebo9 libgazebo9-dev libignition-math2
-# RUN sudo apt upgrade -y libignition-math2
 RUN if [ ${CUDA} == "on" ]; then sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/gazebo-stable.list'; fi
 RUN if [ ${CUDA} == "on" ]; then sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D2486D2DD83DB69272AFE98867170598AF249743; fi
 RUN if [ ${CUDA} == "on" ]; then sudo apt update ; fi
-RUN if [ ${CUDA} == "on" ]; then sudo apt-get --only-upgrade install -y gazebo9 gazebo0-common libgazebo9 libgazebo9-dev libignition-math2*; fi
+RUN if [ ${CUDA} == "on" ]; then sudo apt-get --only-upgrade install -y gazebo9 gazebo9-common libgazebo9 libgazebo9-dev libignition-math2*; fi
 RUN if [ ${CUDA} == "on" ]; then sudo apt upgrade -y libignition-math2; fi
 
 
@@ -61,7 +56,7 @@ RUN echo "1"
 # # Set up taurob simulation 
 RUN cd /home/$USERNAME/catkin_ws/src && /ros_entrypoint.sh catkin_init_workspace 
 COPY ./install/taurob_tracker_simulation /home/$USERNAME/catkin_ws/src/taurob_tracker_simulation
-RUN if [ ${CUDA} == "on" ]; then sed -i 'g#arg name="gpu"       default="false"#arg name="gpu"       default="true"#g' /home/$USERNAME/catkin_ws/src/taurob_tracker_simulation/taurob_tracker_bringup/launch/.launch; fi
+RUN if [ ${CUDA} == "on" ]; then sed -i 'g#arg name="gpu"       default="false"#arg name="gpu"       default="true"#g' /home/$USERNAME/catkin_ws/src/taurob_tracker_simulation/taurob_tracker_bringup/launch/*.launch; fi
 RUN cd /home/$USERNAME/ && sudo chown -R fhtw_user:fhtw_user catkin_ws
 RUN cd /home/ && sudo chown -R fhtw_user:fhtw_user $USERNAME
 
