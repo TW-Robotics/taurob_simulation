@@ -15,19 +15,25 @@ For more about the S&R project see: [Design and Implementation of a Mobile Searc
 
 
 There are 2 ways to build it:
+
 1. Build from source:
     1. Install dependencies
+
     ```
     cd catkin_ws/src
     git clone https://github.com/tu-darmstadt-ros-pkg/gazebo_ros_control_select_joints.git
 	git clone https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
     cd .. && catkin_make
-
     ```
+
     2. Copy the [files](./install/taurob_tracker_simulation) to your catkin_ws/src
+   
     `cd catkin_ws && catkin_make`
+
 2. Use Docker:
-    1. Execute the [build.sh](./build.sh) script (set arguments in file if needed)
+    1. Execute the [build.sh](./build.sh) script (set argument VERSION in [file](./build.sh) if GPU support is desired)
+   
     `bash build.sh`
     2. Execute  th [run_docker.sh](run_docker.sh) script
+   
     `bash run_docker.sh`
