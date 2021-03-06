@@ -61,6 +61,7 @@ COPY ./install/mapping /home/$USERNAME/catkin_ws/src/fhtw_pkgs/mapping
 COPY ./install/navigation /home/$USERNAME/catkin_ws/src/fhtw_pkgs/navigation
 COPY ./install/perception /home/$USERNAME/catkin_ws/src/fhtw_pkgs/perception
 RUN if [ ${CUDA} == "on" ]; then sed -i 's#arg name="gpu"       default="false"#arg name="gpu"       default="true"#g' /home/$USERNAME/catkin_ws/src/taurob_tracker_simulation/taurob_tracker_bringup/launch/bringup.launch; fi
+RUN if [ ${CUDA} == "on" ]; then sed -i 's#GPU="false"#GPU="true"#g' /home/$USERNAME/catkin_ws/src/taurob_tracker_simulation/taurob_tracker_bringup/scripts/start_sim.sh; fi
 RUN cd /home/$USERNAME/ && sudo chown -R fhtw_user:fhtw_user catkin_ws
 RUN cd /home/ && sudo chown -R fhtw_user:fhtw_user $USERNAME
 USER fhtw_user
