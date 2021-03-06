@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<launch>
+    <arg name="reconf"  default="false"/>
+    <param if="$(arg reconf)"      name="reconf"     value="$(arg reconf)"/>
+
+
+    <!-- <include file="$(find fhtw_launch)/launch/sick_tim551_2050001_front.launch"/>-->
+    <!-- <include file="$(find darknet_ros)/launch/yolo_hu_si_xterm.launch"/>-->
+
+    <!-- PID Controller --> 
+    <node name="pid" pkg="pid" type="controller" output="log">
+        <param name="Kp" value="0.4" />
+        <param name="Ki" value="0.01" />
+        <param name="Kd" value="0.18" />
+        <!--<param name="Kp" value="0.0005" />-->
+        <!--<param name="Ki" value="0.005" />-->
+        <!--<param name="Kd" value="0.001" />-->
+        <param name="upper_limit"   value="2" />
+        <param name="lower_limit"   value="-2" />
+        <param name="windup_limit"  value="4"/>
+        <param name="setpoint_timeout" value="0.1" />
+    </node>
+
+    <group if="$(arg reconf)">
+        <!-- Dynamic Reconfigure -->
+        <node name="reconf" pkg="rqt_reconfigure" type="rqt_reconfigure"/>
+        <!-- RQT_PLOT -->
+        <node name="rqt" pkg="rqt_plot" type="rqt_plot" args="/setpoint/data /state/data /control_effort"/>
+    </group>
+
+    <rosparam command="load" file="$(find follow_human)/config/config.yaml"/>
+    <!-- Line Detection -->
+    <node pkg="follow_human" type="follow_human_main" name="follow_human_main" output="screen"/>
+        
+        
+</launch>
+        

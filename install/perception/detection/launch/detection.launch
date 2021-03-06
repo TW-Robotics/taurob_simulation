@@ -1,0 +1,11 @@
+
+<launch>
+	<node 
+		pkg="detection" 
+		type="detection_main" 
+		name="detection"
+		output="screen"
+        respawn="true"
+		>
+	</node>
+</launch>

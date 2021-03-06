@@ -27,6 +27,6 @@ docker run \
 	--gpus all  \
     --net=host \
     --name="taurob_sim" \
-    melodic-gpu_taurob_simulation \
+    melodic-gpu-ml_taurob_simulation \
     tmux
 

@@ -1,0 +1,11 @@
+
+<launch>
+	<node 
+		pkg="detection" 
+		type="clicked_point_to_csv.py" 
+		name="clicked_point_to_csv"
+		output="screen"
+        respawn="true"
+		>
+	</node>
+</launch>

@@ -1,0 +1,21 @@
+actions: []
+authors: ''
+brief: ''
+bugtracker: ''
+depends:
+- dynamic_reconfigure
+- catkin
+- roscpp
+- std_msgs
+- roslib
+- pid
+- darknet_ros_msgs
+- cv_bridge
+description: The follow_human package
+license: TODO
+maintainers: workstation <workstation@todo.todo>
+msgs: []
+package_type: package
+repo_url: ''
+srvs: []
+url: ''

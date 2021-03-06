@@ -1,6 +1,6 @@
 #!/bin/bash
 ROS_DISTRO="melodic"    # supported versions: ["melodic"]
-VERSION="-gpu"   # supported versions: ["", "-gpu", "-gpu-ml"]
+VERSION="-gpu-ml"   # supported versions: ["", "-gpu", "-gpu-ml"]
 if [ "$VERSION" != "" ]; then
     CUDA="on"
     echo "Building with CUDA support"
@@ -23,7 +23,9 @@ docker build \
 # Changes in files depending on selected distro and version #
 sed -i "s/$ROS_DISTRO/ROS_DISTRO/" ./ros_entrypoint.sh || true
 if [ "$CUDA" == "on" ]; then
-    sed -i "s#--privileged#--privileged\n\t--gpus all #" ./run_docker.sh || true
-    sed -i "s#--privileged#--privileged \\\#" ./run_docker.sh || true
+    if ! grep -rq "gpus" run_docker.sh; then
+        sed -i "s#--privileged#--privileged\n\t--gpus all #" ./run_docker.sh || true
+        sed -i "s#--privileged#--privileged \\\#" ./run_docker.sh || true
+    fi
     sed -i "s/"$ROS_DISTRO"_taurob_simulation/"$ROS_DISTRO""$VERSION"_taurob_simulation/" ./run_docker.sh || true
 fi

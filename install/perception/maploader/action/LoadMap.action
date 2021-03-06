@@ -1,0 +1,17 @@
+#goal
+float64 longitude 
+float64 latitude 
+float64 delta
+float64 resolution_x
+float64 resolution_y
+string folder
+string maptype
+---
+#result
+#duration time_elapsed
+#uint32 updates_sent
+string file_location
+---
+#execution
+#duration time_elapsed
+#duration time_remaining

@@ -1,0 +1,107 @@
+<launch>
+
+    <arg name="realsense"   default="false"/>
+    <arg name="kinect"      default="false"/>
+    <arg name="interne"     default="false"/>
+    <arg name="external"    default="false"/>
+    <arg name="velodyne"    default="true"/>
+    <arg name="mapping"     default="false"/>
+    <arg name="yolo"        default="false"/>
+    <arg name="radio"       default="false"/>
+    <arg name="external_light" default="true"/>
+
+    <param if="$(arg realsense)"      name="realsense"     value="$(arg realsense)"/>
+    <param if="$(arg kinect)"         name="kinect"        value="$(arg kinect)"/>
+    <param if="$(arg mapping)"        name="mapping"       value="$(arg mapping)"/>
+    <param if="$(arg yolo)"           name="yolo"          value="$(arg yolo)"/>
+    <param if="$(arg radio)"          name="radio"         value="$(arg radio)"/>
+
+    <!--Setup TF-Tree Taurob-->
+
+    <!--Laserscanner Sick front and rear-->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="laser_front_tf" args="0.1575 0.00 0.02 1 0 0 0 chassis_link laser_front_mount_link" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="laser_rear_tf" args="-0.613 -0.082 0.017 0 1 0 0 chassis_link laser_rear_mount_link" />
+
+
+
+    <!--Tower z=0.781 x=-0.72-->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="tower_top_tf" args="-0.69 0 0.781 0 0 0 chassis_link tower_top_mount_link" />
+
+    <!--Velodyne-->
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="velodyne_tf" args="0.02625 0 0.11781 1.5708 0 0.349066 tower_top_mount_link velodyne_mount_link" />-->
+    <!-- Schiefe des Turmes mitberuecksichtigt -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="velodyne_tf" args="0.02625 0 0.11781 1.5708 0.01745328 0.349066 tower_top_mount_link velodyne_mount_link" />
+    
+    <!--RealSense-->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="RealSense_rear_tf" args="-0.09 -0.02968 0.0175 3.14159 0.785398 0 tower_top_mount_link RealSense_rear_link" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="RealSense_front_tf" args="0.0725 -0.19 0.07 -1.570795 0 0 arm_link_3 RealSense_front_link" />
+
+    <!--IMU-->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="imu_link_change" args="-0.080 0.14 0.050 0 0 0 1 chassis_link imu_link"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="imu_change" args="0 0 0 0.7071068 0.7071068 0 0 imu_link imu"/>
+
+    <!--External camera IDS-->
+    <node pkg="tf2_ros"  type="static_transform_publisher"  name="camera_rgb_mount"   args="-0.69 0 0.639 0 0 0 chassis_link camera_rgb_mount"/>
+            <!--from camera mount plate to sensor center 0.029 + difference imu height (map) to ground 0.230 = 0.259-->
+    <node pkg="tf2_ros"  type="static_transform_publisher"  name="ids_mount"   args="0 0 0.259 0 0 0 camera_rgb_mount ids_mount"/>
+
+    <!-- <include file="$(find fhtw_launch)/launch/tracker.launch"/> -->
+    <include file="$(find taurob_base_node)/launch/tracker.launch"/> 
+    
+
+    <!--
+    <include file="$(find fhtw_launch)/launch/sick_tim551_2050001_front.launch"/>
+    <include file="$(find fhtw_launch)/launch/sick_tim551_2050001_rear.launch"/>
+    -->
+<!--
+    <include file="$(find phidgets_imu)/launch/imu_raw.launch"/>
+-->
+    <include file="$(find phidgets_imu)/launch/imu.launch"/>
+
+<!--
+    <group if="$(arg mapping)">
+        <include file="$(find fhtw_launch)/launch/mapping.launch"/>
+    </group>
+    <group if="$(arg radio)">
+        <include file="$(find fhtw_launch)/launch/radioactiv.launch"/>
+    </group>
+
+    <group if="$(arg interne)">
+        <include file="$(find fhtw_launch)/launch/rtsp_stream_front.launch"/>
+        <include file="$(find fhtw_launch)/launch/rtsp_stream_rear.launch"/>
+    </group>
+-->  
+    <!--External IDS-->
+<!--
+    <group if="$(arg external)">
+        <include file="$(find fhtw_launch)/launch/ueye.launch"/>
+-->
+        <!--node pkg="tf2_ros"  type="static_transform_publisher"  name="ids_mount"   args="-0.575 -0.14 0.645 0 0 0 imu_link ids_mount"/-->
+        <!--<group if="$(arg yolo)">-->
+        <!--    <include file="$(find darknet_ros)/launch/yolo_v2_human.launch"/>-->
+        <!--</group>-->
+<!--
+    </group>
+-->
+
+    <!--Start optional rgbd-cameras -->
+    <group if="$(arg realsense)">
+        <node pkg="tf2_ros"  type="static_transform_publisher"  name="realsense_tf"   args="0.20 0 0.03 0 0 0 chassis_link camera_link"/>
+        <include file="$(find realsense2_camera)/launch/rs_rgbd.launch"/>
+    </group>
+
+    <group if="$(arg kinect)">
+        <node pkg="tf2_ros" type="static_transform_publisher"   name="kinect_tf"      args="0.38 0 0.15 0 0 0 chassis_link kinect2_link"/>
+        <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch"/>
+    </group>
+<!--
+    <group if="$(arg velodyne)">
+        <include file="$(find fhtw_launch)/launch/VLP16_points.launch"/>
+    </group>
+
+    <group if="$(arg external_light)">
+        <include file="$(find fhtw_launch)/launch/arduino_light.launch"/>
+    </group>
+-->
+</launch>
+

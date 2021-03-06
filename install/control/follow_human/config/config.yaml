@@ -1,0 +1,7 @@
+setpoint_height: 400  # [pixel] default: 400
+min_probability: 0.5  # [percent]
+image_topic: "/camera_rgb/image_raw"
+min_range_lidar: 0.4    # [m] 
+use_pid: false      # [bool] true currently not working
+kp: 0.00038125       # [float] P Gain for angular velocity
+kp_lin: 0.168125     # [float] P Gain for equals max linear velocity

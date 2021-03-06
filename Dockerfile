@@ -45,20 +45,46 @@ USER fhtw_user
 RUN rosdep update
 
 USER root
-# #----------#
-# # Set up Simulation Environment #
+#----------#
+
+# Set up Simulation Environment #
 RUN mkdir -p /home/$USERNAME/git/gazebo_sim && cd /home/$USERNAME/git/gazebo_sim \
 	&& git clone https://github.com/tu-darmstadt-ros-pkg/gazebo_ros_control_select_joints.git \
 	&& git clone https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
 RUN cd /home/$USERNAME/catkin_ws/src && ln -s /home/$USERNAME/git/gazebo_sim/* . 
 
-RUN echo "1"
-# # Set up taurob simulation 
+
+# Set up taurob simulation 
 RUN cd /home/$USERNAME/catkin_ws/src && /ros_entrypoint.sh catkin_init_workspace 
 COPY ./install/taurob_tracker_simulation /home/$USERNAME/catkin_ws/src/taurob_tracker_simulation
-RUN if [ ${CUDA} == "on" ]; then sed -i 'g#arg name="gpu"       default="false"#arg name="gpu"       default="true"#g' /home/$USERNAME/catkin_ws/src/taurob_tracker_simulation/taurob_tracker_bringup/launch/*.launch; fi
+COPY ./install/mapping /home/$USERNAME/catkin_ws/src/fhtw_pkgs/mapping
+COPY ./install/navigation /home/$USERNAME/catkin_ws/src/fhtw_pkgs/navigation
+COPY ./install/perception /home/$USERNAME/catkin_ws/src/fhtw_pkgs/perception
+RUN if [ ${CUDA} == "on" ]; then sed -i 's#arg name="gpu"       default="false"#arg name="gpu"       default="true"#g' /home/$USERNAME/catkin_ws/src/taurob_tracker_simulation/taurob_tracker_bringup/launch/bringup.launch; fi
 RUN cd /home/$USERNAME/ && sudo chown -R fhtw_user:fhtw_user catkin_ws
 RUN cd /home/ && sudo chown -R fhtw_user:fhtw_user $USERNAME
+USER fhtw_user
+RUN cd /home/$USERNAME/catkin_ws/ && rosdep install --from-paths src --ignore-src -r -y
+USER root
 
-
+# Install dependencies #
+# Detection
+RUN sudo apt update && sudo apt install -y tesseract-ocr tesseract-ocr-deu libleptonica-dev libtesseract-dev python-catkin-tools
+# Openpose
+RUN sudo apt install -y libgoogle-glog-dev cuda-cublas* libatlas-base-dev libatlas3-base liblapacke-dev  build-essential graphviz libboost-filesystem-dev libboost-python-dev libboost-system-dev libboost-thread-dev libgflags-dev libgoogle-glog-dev \
+    libhdf5-serial-dev libopenblas-dev python-virtualenv wget  libncurses5-dev libncursesw5-dev\
+    apt-transport-https ca-certificates gnupg software-properties-common wget && wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null\ 
+    && sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main' && sudo apt update && sudo apt install -y cmake
+USER fhtw_user
+RUN cd /home/$USERNAME/git && git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose \
+    && git clone --recursive https://github.com/leggedrobotics/darknet_ros \
+    && cd openpose && git checkout tags/v1.7.0 && git submodule update --init --recursive --remote && mkdir build 
+# Manually set CUDA and NVCC Version to build openpose and 3d party libs
+RUN sed -i 's/-DCUDA_ARCH_NAME=${CUDA_ARCH}/-DCUDA_ARCH_NAME=Turing/g' /home/$USERNAME/git/openpose/CMakeLists.txt 
+RUN sed -i "/ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)/a   set(CUDA_gpu_detect_output 7.5)" /home/$USERNAME/git/openpose/cmake/Cuda.cmake
+RUN cd /home/$USERNAME/git/openpose && cd build && cmake .. && make -j && sudo make install
+RUN git clone https://github.com/ravijo/ros_openpose /home/$USERNAME/catkin_ws/src/ros_openpose && sed -i "/find_package(OpenMP)/a   find_package(Threads REQUIRED)" /home/$USERNAME/catkin_ws/src/ros_openpose/CMakeLists.txt
+RUN cd /home/$USERNAME/catkin_ws/src/ && ln -s  /home/$USERNAME/git/darknet_ros /home/$USERNAME/catkin_ws/src/ && cd /home/$USERNAME/catkin_ws/ && rm -rf build devel \
+    && /bin/bash -c "source /opt/ros/melodic/setup.bash; catkin build -c -DCMAKE_BUILD_TYPE=Release"; exit 0
+USER root
 ENTRYPOINT ["/ros_entrypoint.sh"]

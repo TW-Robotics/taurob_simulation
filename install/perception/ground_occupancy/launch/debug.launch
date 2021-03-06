@@ -1,0 +1,6 @@
+
+<launch>
+
+    <node name="ground_occupancy" type="ground_occupancy" pkg="ground_occupancy" output="screen" launch-prefix="xterm -hold -e gdbgui --project $(find ground_occupancy)/src --args" />
+
+</launch>

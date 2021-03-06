@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="folder" default="testfolder"/>
+  <param name="folder" type="string" value="$(arg folder)"/>
+
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch" >
+      <arg name="align_depth" value="true" />
+      <arg name="filters" value="pointcloud" />
+  </include>
+  <node name="take_picture" pkg="openpose_testing" type="take_picture" output="screen" />
+  <node name="get_images" pkg="openpose_testing" type="get_images" output="screen" />
+  <node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/image_pub" />
+  </node>
+</launch>

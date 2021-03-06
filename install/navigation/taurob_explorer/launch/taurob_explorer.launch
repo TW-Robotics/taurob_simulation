@@ -1,0 +1,6 @@
+<launch>
+    <rosparam command="load" file="$(find taurob_explorer)/config/config.yaml"/>
+
+    <node name="taurob_explorer_rrt" pkg="taurob_explorer" type="main.py" output="screen" />
+
+</launch>

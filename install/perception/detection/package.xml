@@ -1,0 +1,68 @@
+﻿<?xml version="1.0"?>
+<package format="2">
+  <name>detection</name>
+  <version>1.0.0</version>
+  <description>The detection package</description>
+
+
+  <maintainer email="georg.novotny@technikum-wien.at">Georg Novotny</maintainer>
+  <author email="georg.novotny@technikum-wien.at">Georg Novotny</author>
+  <author email="christoph.poeschko@technikum-wien.at">Christoph Pöschko</author>
+
+
+  <license>GPLv3</license>
+
+
+  <doc_depend>doxygen</doc_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>darknet_ros_msgs</build_depend>
+  <build_depend>octomap_msgs</build_depend>
+  <build_depend>octomap_ros</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>yaml_cpp_0_3</build_depend>
+  <build_depend>roslib</build_depend>
+  <build_depend>tf2_ros</build_depend>
+  <build_depend>message_filters</build_depend>	
+  <build_depend>tf2</build_depend>	
+  <build_depend>darknet_ros_msgs</build_depend>	
+	
+  <build_export_depend>dynamic_reconfigure</build_export_depend>
+  <build_export_depend>cv_bridge</build_export_depend>
+  <build_export_depend>image_transport</build_export_depend>
+  <build_export_depend>darknet_ros_msgs</build_export_depend>
+  <build_export_depend>octomap_msgs</build_export_depend>
+  <build_export_depend>octomap_ros</build_export_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <build_export_depend>yaml_cpp_0_3</build_export_depend>
+  <build_export_depend>roslib</build_export_depend>
+  <build_export_depend>tf2_ros</build_export_depend>
+  <build_export_depend>message_filters</build_export_depend>
+  <build_export_depend>tf2</build_export_depend>
+  <build_export_depend>darknet_ros_msgs</build_export_depend>
+
+  <exec_depend>dynamic_reconfigure</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
+  <exec_depend>image_transport</exec_depend>
+  <exec_depend>darknet_ros_msgs</exec_depend>
+  <exec_depend>octomap_msgs</exec_depend>
+  <exec_depend>octomap_ros</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>yaml_cpp_0_3</exec_depend>
+  <exec_depend>roslib</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>	
+  <exec_depend>message_filters</exec_depend>
+  <exec_depend>tf2</exec_depend>
+  <exec_depend>darknet_ros_msgs</exec_depend>
+	
+
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>

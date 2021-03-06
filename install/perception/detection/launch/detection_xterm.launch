@@ -1,0 +1,12 @@
+
+<launch>
+launch-prefix="xterm -e gdbgui
+	<node 
+		pkg="detection" 
+		type="detection_main" 
+		name="detection"
+		output="screen"
+		launch-prefix="xterm -hold -e gdbgui --project $(find detection)/src --args" 
+		>
+	</node>
+</launch>

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="folderpath" default="testfolder/1"/>
+  <param name="folderpath" type="string" value="$(arg folderpath)"/>
+  <node name="publish_picture" pkg="openpose_testing" type="publish_picture" output="screen" />
+  <!--<node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/camera/color/image_raw" />
+  </node> -->
+  <include file="$(find ros_openpose)/launch/run.launch" />
+  <node name="getOpenPoseData" pkg="openpose_testing" type="getOpenPoseData" output="screen" />
+</launch>

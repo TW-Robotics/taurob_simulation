@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+  <!--
+    res_x             = Horizontal resolution of map.
+    res_y             = Vertical resolution of map.
+    delta             = Zoom level. This value is added to and subtracted from the received GPS coordinates to get the 4 corners of the image that will get downloaded. 
+    filepath          = Path to folder where images will be downloaded and edited. This folder will contain the 2 folders "loaded" and "edited".
+    maptype           = "aerial" or "streetmap". Type of map that will be downloaded. Based on input the URL to the corresponding mapserver will be selected.  
+    delete            = Bool value whether downloaded and edited images should be deleted if they are outdated. 
+    use_ekf           = Bool value whether the service to draw the robot's orientation on the map should use odometry data or the output from robot_pose_ekf.
+    offline           = Bool value. If True, no new images will be downloaded, instead the most recent map will be published and edited
+    gps_input         = Topic that client subscribes to for gps data
+    odom_input        = Topic that client subscribest to for orientation data
+    angle_calibration = Orientation of the robot at startup in degrees (0/360 = East, 90 = North, 180 = West, 270 = South). Calibration can be performed while the robot is operating by publishing the angle on the topic 'angle_correction'  
+  -->
+
+  <param name="res_x" value="1920" />
+  <param name="res_y" value="1920" />
+  <param name="delta" value="0.001" />
+  <param name="filepath" value="Images" />
+  <param name="maptype" value="streetmap" />
+  <param name="delete" value="False" />
+  <param name="use_ekf" value="False" />
+  <param name="offline" value="False" />
+  <param name="imu_input" value="imu/data_raw" />
+  <param name="imu_output" value="imu_data" />
+  <param name="gps_input" value="fix" />
+  <param name="odom_input" value="odom" />
+  <param name="angle_calibration" value="280" />
+
+  <include file="$(find maploader)/launch/tau_bringup.launch"/>
+  <include file="$(find gps_common)/launch/gpstest.launch"/>
+  <include file="$(find maploader)/launch/bag.launch"/>
+  <node name="maploader_client" pkg="maploader" type="client.py" output="screen"/>
+  <node name="maploader_actionserver" pkg="maploader" type="actionserver.py" output="screen"/>
+  <node name="maploader_serviceserver" pkg="maploader" type="serviceserver.py" output="screen"/>
+</launch>

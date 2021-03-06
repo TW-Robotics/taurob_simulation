@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node name="transform_point_cloud" pkg="transform_point_cloud"
+      type="transform_point_cloud"
+      output="screen" >
+    <param name="target_frame" value="velodyne_mount_link" />
+    <param name="source_frame" value="" />
+    <param name="timeout" value="6" />
+    <remap from="point_cloud" to="/RealSense_rear/depth_registered/points" />
+    <remap from="point_cloud_transformed" to="velodyne_points" />
+  </node>
+</launch>

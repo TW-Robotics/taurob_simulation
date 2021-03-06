@@ -1,0 +1,41 @@
+<launch>
+	<param name="use_sim_time" value="true"/>
+    <node pkg="rosbag" type="play" name="player" output="log" args="--clock /home/andi/Documents/rosbag/2019-09-10-09-41-35.bag -l" /> 
+  <param name="robot_description" command="$(find xacro)/xacro.py $(find taurob_tracker_description)/urdf/tracker.urdf.xacro"/>
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen"/>
+  <!--    <param name="laser_rear/robot_description" command="$(find xacro)/xacro --><!--inorder '$(find fhtw_launch)/urdf/laser_rear.urdf.xacro'" />-->
+  <node name="laser_rear" pkg="robot_state_publisher" type="state_publisher" ns="laser_rear" />
+  <!--     <param name="laser_front/robot_description" command="$(find xacro)/xacro --><!--inorder '$(find fhtw_launch)/urdf/laser_front.urdf.xacro'" />--> 
+  <node name="laser_front" pkg="robot_state_publisher" type="state_publisher" ns="laser_front" />
+<!--
+    <node pkg="tf2_ros" type="static_transform_publisher" name="imu_link_change" args="-0.080 0.14 0.050 0 0 0 1 chassis_link imu_link"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="imu_change" args="0 0 0 0.7071068 0.7071068 0 0 imu_link imu"/>
+-->
+    <!--Tower z=0.781 x=-0.72-->
+<!--
+    <node pkg="tf2_ros" type="static_transform_publisher" name="tower_top_tf" args="-0.72 0 0.781 0 0 0 chassis_link tower_top_mount_link" />
+-->
+
+    <!--Velodyne-->
+<!--
+    <node pkg="tf2_ros" type="static_transform_publisher" name="velodyne_tf" args="0.02625 0 0.11781 1.5708 0 0.349066 tower_top_mount_link velodyne_mount_link" />
+-->
+    
+    <!--RealSense-->
+<!--
+    <node pkg="tf2_ros" type="static_transform_publisher" name="RealSense_rear_tf" args="-0.09 -0.02968 0.0175 3.14159 0.785398 0 tower_top_mount_link RealSense_rear_link" />
+-->
+
+
+<!--
+    <node pkg="tf2_ros" type="static_transform_publisher" name="laser_front_tf"     args="0.1575 0.00 0.04 1 0 0 0 chassis_link laser_front_mount_link" />
+<node pkg="tf2_ros" type="static_transform_publisher" name="laser_rear_tf" args="-0.613 -0.082 0.017 0 1 0 0 chassis_link laser_rear_mount_link" />
+-->
+    <node pkg="tf2_ros"  type="static_transform_publisher"  name="realsense_tf"     args="0.20 0 0.03 0 0 0 chassis_link camera_link"/> 
+    <node pkg="tf2_ros"  type="static_transform_publisher"  name="base_tf"          args="0.122 0 0.193 0 0 0 base_link chassis_link"/> 
+<!--
+    <node pkg="rqt_image_view"     type="rqt_image_view"   name="rqt_image_view" args="/darknet_ros/detection_image"/>
+-->
+<node pkg="rviz" name="rviz" type="rviz" args="-d /home/andi/Documents/rosbag/gps_imu_laserscan_2.rviz"/>
+
+</launch>

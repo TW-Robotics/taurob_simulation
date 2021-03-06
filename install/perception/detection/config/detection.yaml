@@ -1,0 +1,5 @@
+map_frame_id: "map"
+cam_frame_id: "ids_mount"
+oszil_range_y: 0.05    #[m]
+oszil_range_z: 0.05    #[m]
+step_size: 0.01       # needs to be smaller than oszil_range
