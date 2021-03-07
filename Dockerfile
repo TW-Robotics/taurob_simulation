@@ -103,8 +103,8 @@ RUN mkdir -p /home/$USERNAME/cartographer_ws/ && cd /home/$USERNAME/cartographer
 RUN cd /home/$USERNAME/cartographer_ws/ && source /home/fhtw_user/catkin_ws/devel/setup.bash && source /opt/ros/melodic/setup.bash &&  catkin_make_isolated --install --use-ninja \
   -DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH};${PWD}/install_isolated;${PWD}/protobuf/install"
 RUN source /home/fhtw_user/cartographer_ws/install_isolated/setup.bash && rm -r /home/fhtw_user/catkin_ws/devel && cd /home/fhtw_user/catkin_ws && catkin build -c -DCMAKE_BUILD_TYPE=Release && source devel/setup.bash; exit 0
-USER fhtw_user
-RUN sed -i '125 i source /home/fhtw_user/cartographer_ws/install_isolated/setup.bash' /home/fhtw_user/.bashrc
+# USER fhtw_user
+# RUN sed -i '125 i source /home/fhtw_user/cartographer_ws/install_isolated/setup.bash' /home/fhtw_user/.bashrc
 USER root
 COPY ./ros_entrypoint.sh /ros_entrypoint.sh
 RUN chmod +x /ros_entrypoint.sh
