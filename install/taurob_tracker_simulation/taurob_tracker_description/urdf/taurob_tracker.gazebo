@@ -19,7 +19,7 @@
       <robotBaseFrame>base_link</robotBaseFrame>
       <yaw_velocity_p_gain>250</yaw_velocity_p_gain>
       <!--<x_velocity_p_gain>500</x_velocity_p_gain>-->
-      <publishOdometryTf>0</publishOdometryTf>
+      <publishOdometryTf>1</publishOdometryTf>
     </plugin>
   </gazebo>
 

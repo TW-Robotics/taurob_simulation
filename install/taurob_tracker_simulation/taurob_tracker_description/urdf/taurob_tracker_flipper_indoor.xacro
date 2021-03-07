@@ -55,13 +55,7 @@
 
     
     <link name="base_link"/>
-    <joint name="odom_joint" type="fixed">
-      <origin xyz="${-tracker_base_offset_x} 0 0.193" rpy="0 0 0"/>
-      <parent link="base_link"/>
-      <child link="odom"/>
-    </joint>
     
-    <link name="odom"/>
     <joint name="chassis_joint" type="fixed">
       <origin xyz="${-tracker_base_offset_x} 0 0.193" rpy="0 0 0"/>
       <parent link="base_link"/>
