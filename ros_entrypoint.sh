@@ -25,8 +25,10 @@ if [ -z "$1" ]; then
     set - "/bin/bash" -l
 fi
 source /opt/ros/ROS_DISTRO/setup.bash
-source /home/fhtw_user/catkin_ws/devel/setup.bash
-
+# source /home/fhtw_user/cartographer_ws/install_isolated/setup.bash
+# cd /home/fhtw_user/catkin_ws && rm -r devel/ && catkin build  -c -DCMAKE_BUILD_TYPE=Release
+# source /home/fhtw_user/catkin_ws/devel/setup.bash
+cd
 # Run the provided command using user 'fhtw_user'
 export HOME="/home/fhtw_user/"
 exec gosu fhtw_user "$@"

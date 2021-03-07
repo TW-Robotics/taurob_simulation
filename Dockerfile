@@ -87,5 +87,25 @@ RUN cd /home/$USERNAME/git/openpose && cd build && cmake .. && make -j && sudo m
 RUN git clone https://github.com/ravijo/ros_openpose /home/$USERNAME/catkin_ws/src/ros_openpose && sed -i "/find_package(OpenMP)/a   find_package(Threads REQUIRED)" /home/$USERNAME/catkin_ws/src/ros_openpose/CMakeLists.txt
 RUN cd /home/$USERNAME/catkin_ws/src/ && ln -s  /home/$USERNAME/git/darknet_ros /home/$USERNAME/catkin_ws/src/ && cd /home/$USERNAME/catkin_ws/ && rm -rf build devel \
     && /bin/bash -c "source /opt/ros/melodic/setup.bash; catkin build -c -DCMAKE_BUILD_TYPE=Release"; exit 0
+
+# Cartographer
+RUN sudo apt-get install -y python-wstool python-rosdep ninja-build stow
+RUN mkdir -p /home/$USERNAME/cartographer_ws/ && cd /home/$USERNAME/cartographer_ws && wstool init src && wstool merge -t src https://raw.githubusercontent.com/cartographer-project/cartographer_ros/master/cartographer_ros.rosinstall \
+   &&  wstool update -t src && rosdep install --from-paths src --ignore-src --rosdistro=melodic -y && bash src/cartographer/scripts/install_abseil.sh \
+   && git clone --branch v3.4.1 https://github.com/google/protobuf.git \
+   && cd protobuf && mkdir build && cd build \ 
+   && cmake -G Ninja \
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+    -DCMAKE_BUILD_TYPE=Release \
+    -Dprotobuf_BUILD_TESTS=OFF \
+    -DCMAKE_INSTALL_PREFIX=../install \
+    ../cmake && ninja && ninja install
+RUN cd /home/$USERNAME/cartographer_ws/ && source /home/fhtw_user/catkin_ws/devel/setup.bash && source /opt/ros/melodic/setup.bash &&  catkin_make_isolated --install --use-ninja \
+  -DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH};${PWD}/install_isolated;${PWD}/protobuf/install"
+RUN source /home/fhtw_user/cartographer_ws/install_isolated/setup.bash && rm -r /home/fhtw_user/catkin_ws/devel && cd /home/fhtw_user/catkin_ws && catkin build -c -DCMAKE_BUILD_TYPE=Release && source devel/setup.bash; exit 0
+USER fhtw_user
+RUN sed -i '125 i source /home/fhtw_user/cartographer_ws/install_isolated/setup.bash' /home/fhtw_user/.bashrc
 USER root
+COPY ./ros_entrypoint.sh /ros_entrypoint.sh
+RUN chmod +x /ros_entrypoint.sh
 ENTRYPOINT ["/ros_entrypoint.sh"]
