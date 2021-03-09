@@ -1,0 +1,19 @@
+#!/bin/bash
+SOURCE_BRANCH="$(git symbolic-ref -q --short HEAD)"
+GIT_SHA1="$(git rev-parse -q HEAD)"
+
+ROS_DISTRO="melodic"    # supported versions: ["melodic"]
+VERSION="-gpu-ml"   # supported versions: ["", "-gpu", "-gpu-ml"]
+CUDA="on"
+sed -i "s/ROS_DISTRO/$ROS_DISTRO/" ./ros_entrypoint.sh
+BASE="georgno/fhtw_taut:latest"
+echo "[***] Build hook running"
+docker build \
+    --rm \
+    --tag "$ROS_DISTRO""$VERSION"_taurob_simulation \
+    --build-arg ROS_DISTRO="$ROS_DISTRO" \
+    --build-arg VERSION="$VERSION" \
+    --build-arg CUDA="$CUDA" \
+    --file Dockerfile .
+docker tag "$ROS_DISTRO""$VERSION"_taurob_simulation 
+docker push "$BASE"-"$ROS_DISTRO""$VERSION"
