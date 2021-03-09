@@ -15,5 +15,5 @@ docker build \
     --build-arg VERSION="$VERSION" \
     --build-arg CUDA="$CUDA" \
     --file Dockerfile .
-docker tag "$ROS_DISTRO""$VERSION"_taurob_simulation 
+docker tag "$ROS_DISTRO""$VERSION"_taurob_simulation "$BASE"-"$ROS_DISTRO""$VERSION"
 docker push "$BASE"-"$ROS_DISTRO""$VERSION"
