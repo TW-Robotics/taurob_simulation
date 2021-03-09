@@ -7,7 +7,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_0.stl"/>
+        <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_0.stl"/>
       </geometry>
     </collision>
   </macro>  
@@ -16,7 +16,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_1.stl"/>
+        <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_1.stl"/>
       </geometry>
     </collision>
   </macro>  
@@ -25,7 +25,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_2.stl"/>
+        <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_2.stl"/>
       </geometry>
     </collision>
   </macro>  
@@ -34,7 +34,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_3.stl"/>
+        <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_3.stl"/>
       </geometry>
     </collision>
   </macro>
@@ -43,7 +43,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_4.stl"/>
+        <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_4.stl"/>
       </geometry>
     </collision>
   </macro>
@@ -52,7 +52,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tgripper_link_1.stl"/>
+        <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tgripper_link_1.stl"/>
       </geometry>
     </collision>
   </macro>
@@ -61,7 +61,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tgripper_link_2.stl"/>
+        <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tgripper_link_2.stl"/>
       </geometry>
     </collision>
   </macro>

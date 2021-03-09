@@ -3,7 +3,7 @@
   
   <arg name="outdoor"   default="true"/>
   <arg name="gui"       default="false"/>
-  <arg name="gpu"       default="false"/>
+  <arg name="gpu"       default="true"/>
 
   <!-- Start Gazebo -->
   <group if="$(arg outdoor)">

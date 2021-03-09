@@ -13,19 +13,6 @@ GUI="false"
 GPU="false"
 
 
-# setupDockerROS(){
-#         export DOCKER_BRIDGE_HOST="$(ip route get "$(docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}' bridge)" | head -n 1 | awk '{print $6;}')"
-#         export DOCKER_CONTAINER_IP="$(docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' fhtw_cartographer)"
-#         export ROS_MASTER_URI=http://"$DOCKER_CONTAINER_IP":11311
-#         export ROS_IP="$DOCKER_BRIDGE_HOST"
-#         export ROS_HOSTNAME="$DOCKER_BRIDGE_HOST"
-#         echo "ROS_MASTER_URI= >$ROS_MASTER_URI<"
-#         echo "ROS_IP= >$ROS_IP<"
-#         echo "ROS_HOSTNAME= >$ROS_HOSTNAME<"
-# }
-
-
-
 usage(){
     echo -e "Usage: $0  [-OPTIONS]\n    OPTIONS:
           [-s <int> (1-3) default: 1 ... set size of generated map, 1=small 3=large]

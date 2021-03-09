@@ -4,7 +4,7 @@
   <arg name="laser_offset_rot" default="0.0" />
 
   <param name="robot_description"
-    command="$(find xacro)/xacro --inorder '$(find taurob_tracker_description_sim)/urdf/taurob_tracker_flipper_dae.xacro' laser_rot:=$(arg laser_offset_rot)" />
+    command="$(find xacro)/xacro --inorder '$(find taurob_tracker_description)/urdf/taurob_tracker_flipper_dae.xacro' laser_rot:=$(arg laser_offset_rot)" />
 
   <!-- send fake joint values -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
@@ -15,6 +15,6 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
 
   <!-- Show in Rviz   -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find taurob_tracker_description_sim)/launch/taurob_tracker.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find taurob_tracker_description)/launch/taurob_tracker.rviz"/>
 
 </launch>
