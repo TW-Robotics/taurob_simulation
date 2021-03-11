@@ -24,9 +24,8 @@ docker run \
     --env="DISPLAY=${DISPLAY}" \
     --env="USER_ID=$USER_ID" \
     --privileged \
-	--gpus all  \
     --net=host \
     --name="taurob_sim" \
-    melodic-gpu_taurob_simulation \
+    melodic_taurob_simulation \
     tmux
 

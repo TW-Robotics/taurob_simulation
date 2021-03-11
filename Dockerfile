@@ -13,18 +13,14 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install tools and libraries required
 #
 USER root
-RUN sudo apt update && sudo apt install -y git xterm curl gosu tmux vim less\
+RUN sudo apt update && sudo apt install -y git xterm curl gosu tmux vim xterm less\
     bash-completion libboost-all-dev clang-format bc\
-    ros-$ROS_DISTRO-dwa-local-planner\
-    ros-$ROS_DISTRO-costmap-2d ros-$ROS_DISTRO-hector-gazebo* ros-$ROS_DISTRO-global-planner\
-    ros-$ROS_DISTRO-turtlebot3* ros-$ROS_DISTRO-navigation ros-$ROS_DISTRO-pid\
-    ros-$ROS_DISTRO-rosdoc-lite ros-$ROS_DISTRO-gmapping\
-    ros-$ROS_DISTRO-rqt* \
+    ros-$ROS_DISTRO-rosdoc-lite ros-$ROS_DISTRO-rqt* \
     ros-$ROS_DISTRO-control-toolbox ros-$ROS_DISTRO-controller-manager ros-$ROS_DISTRO-gazebo-ros-control \
     ros-$ROS_DISTRO-hector-xacro-tools ros-$ROS_DISTRO-hector-gazebo-plugins ros-$ROS_DISTRO-gps-common \
     ros-$ROS_DISTRO-robot-pose-ekf ros-$ROS_DISTRO-joint-state-controller ros-$ROS_DISTRO-effort-controllers \
     ros-$ROS_DISTRO-position-controllers ros-$ROS_DISTRO-velodyne-gazebo-plugins ros-$ROS_DISTRO-velodyne-simulator \
-    ros-$ROS_DISTRO-octomap* ros-$ROS_DISTRO-hector-sensors-description ros-$ROS_DISTRO-teleop-twist-keyboard --no-install-recommends
+    ros-$ROS_DISTRO-hector-sensors-description ros-$ROS_DISTRO-teleop-twist-keyboard --no-install-recommends
 
 #-------------#
 # USER fhtw_user
