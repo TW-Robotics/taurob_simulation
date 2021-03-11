@@ -6,7 +6,7 @@ ROS_DISTRO="melodic"    # supported versions: ["melodic"]
 VERSION="-gpu-ml"   # supported versions: ["", "-gpu", "-gpu-ml"]
 CUDA="on"
 LABEL="cpu"
-BASE="georgno/fhtw_taut:latest"
+BASE="georgno/fhtw_tracker_sim:latest"
 echo "[***] Build hook running"
 docker build \
     --rm \
