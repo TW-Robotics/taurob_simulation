@@ -22,7 +22,7 @@ This simulation is build on top of the [official Taurob Tracker ROS-Gazebo Simul
     ```
 
 
-## Usfull commands
+## Useful commands
 ```
 rosservice call /gazebo/reset_simulation    # resets the gazebo simulation to initial state
 killall -9 gzserver                         # kill gazebo server
