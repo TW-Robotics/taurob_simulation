@@ -3,17 +3,17 @@ SOURCE_BRANCH="$(git symbolic-ref -q --short HEAD)"
 GIT_SHA1="$(git rev-parse -q HEAD)"
 
 ROS_DISTRO="melodic"    # supported versions: ["melodic"]
-VERSION="-gpu-ml"   # supported versions: ["", "-gpu", "-gpu-ml"]
-CUDA="on"
-sed -i "s/ROS_DISTRO/$ROS_DISTRO/" ./ros_entrypoint.sh
+LABEL="cpu"
+VERSION=""   # supported versions: ["", "-gpu", "-gpu-ml"]
+CUDA="off"
 BASE="georgno/fhtw_taut:latest"
 echo "[***] Build hook running"
 docker build \
     --rm \
-    --tag "$ROS_DISTRO""$VERSION"_taurob_simulation \
+    --tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" \
     --build-arg ROS_DISTRO="$ROS_DISTRO" \
     --build-arg VERSION="$VERSION" \
     --build-arg CUDA="$CUDA" \
     --file Dockerfile .
-docker tag "$ROS_DISTRO""$VERSION"_taurob_simulation "$BASE"-"$ROS_DISTRO""$VERSION"
-docker push "$BASE"-"$ROS_DISTRO""$VERSION"
+docker tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" "$BASE"-"$ROS_DISTRO"-"$LABEL"
+docker push "$BASE"-"$ROS_DISTRO"-"$LABEL"
