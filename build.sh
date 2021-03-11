@@ -7,7 +7,8 @@ usage()
 }
 
 ROS_DISTRO="melodic" # supported versions: ["melodic"]
-VERSION="-gpu-ml"       # supported versions: ["", "-gpu-ml"]
+VERSION="-gpu-ml"       # supported versions: ["", "gpu", "-gpu-ml"]
+LABEL="gpu"
 opts="v:h"
 
 while getopts ${opts} arg; do
@@ -16,9 +17,11 @@ while getopts ${opts} arg; do
         if [ "${OPTARG}" == "gpu" ]; then
             VERSION="-gpu-ml"
             CUDA="on"
+            LABEL="${OPTARG}"
         elif [ "${OPTARG}" == "cpu" ]; then
             VERSION=""
             CUDA="off"
+            LABEL="${OPTARG}"
         else
             echo "Not support -v argument"
             usage
@@ -40,37 +43,37 @@ done
 
 build() 
 {
-    if [ "$CUDA" != "on" ]; then
+    if [ "$CUDA" == "on" ]; then
         echo "Building with CUDA support"
     else
         echo "Building without CUDA support"
     fi
-
+    sleep 5
     sed -i "s/ROS_DISTRO/$ROS_DISTRO/" ./ros_entrypoint.sh
 
     docker pull georgno/fhtw-ros:"$ROS_DISTRO""$VERSION"
     docker build \
         --rm \
-        --tag "$ROS_DISTRO""$VERSION"_taurob_simulation \
+        --tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" \
         --build-arg ROS_DISTRO="$ROS_DISTRO" \
         --build-arg VERSION="$VERSION" \
         --build-arg CUDA="$CUDA" \
         --file Dockerfile .
-    if [ $0 -eq 0 ]; then
+        
     # Changes in files depending on selected distro and version #
     sed -i "s/$ROS_DISTRO/ROS_DISTRO/" ./ros_entrypoint.sh || true
-        if [ "$CUDA" == "on" ]; then
+    if [ "$CUDA" == "on" ]; then
+        if ! grep -rq "gpus" run_docker.sh; then
             sed -i "s#--privileged#--privileged\n\t--gpus all #" ./run_docker.sh || true
             sed -i "s#--privileged#--privileged \\\#" ./run_docker.sh || true
-            sed -i "s/"$ROS_DISTRO"_taurob_simulation/"$ROS_DISTRO""$VERSION"_taurob_simulation/" ./run_docker.sh || true
-            exit 0
-        else
-            
         fi
-    else 
-        echo -e "\e[31mSomething went wrong during build\e[0m" 
-        exit 1
+        echo -e "\e[32mBuild with CUDA support\e[0m"
+    else
+        echo -e "\e[32mBuild without CUDA support\e[0m"
+        sed  -i "/--gpus all  \\\/d" ./run_docker.sh || true
     fi
+    sed -i "s/fhtw-ros:ROS_DISTRO_taurob_simulation_LABEL/fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL"/" ./run_docker.sh || true
+
 }
 
 main() 
