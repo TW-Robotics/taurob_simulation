@@ -3,9 +3,9 @@ SOURCE_BRANCH="$(git symbolic-ref -q --short HEAD)"
 GIT_SHA1="$(git rev-parse -q HEAD)"
 
 ROS_DISTRO="melodic"    # supported versions: ["melodic"]
-LABEL="cpu"
-VERSION=""   # supported versions: ["", "-gpu", "-gpu-ml"]
-CUDA="off"
+LABEL="LABEL"
+VERSION="VERSION"   # supported versions: ["", "-gpu", "-gpu-ml"]
+CUDA="CUDA"
 BASE="georgno/fhtw-tracker-sim:latest"
 echo "[***] Build hook running"
 docker build \

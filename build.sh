@@ -77,6 +77,8 @@ build()
     # Change Docker hook variables#
     if [ $DOCKER_BUILD_FLAG -eq 0 ]; then
         sed -i "s/LABEL=\"LABEL\"/LABEL=\"$LABEL\"/" ./hooks/build
+        sed -i "s/VERSION=\"VERSION\"/VERSION=\"$VERSION\"/" ./hooks/build
+        sed -i "s/CUDA=\"CUDA\"/CUDA=\"$CUDA\"/" ./hooks/build
     fi
 
 }
