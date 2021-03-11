@@ -72,7 +72,7 @@ build()
         echo -e "\e[32mBuild without CUDA support\e[0m"
         sed  -i "/--gpus all  \\\/d" ./run_docker.sh || true
     fi
-    sed -i "s/fhtw-ros:ROS_DISTRO_taurob_simulation_gpu/fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL"/" ./run_docker.sh || true
+    sed -i "s/fhtw-ros:ROS_DISTRO_taurob_simulation_LABEL/fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL"/" ./run_docker.sh || true
 
 }
 

@@ -27,6 +27,6 @@ docker run \
 	--gpus all  \
     --net=host \
     --name="taurob_sim" \
-    melodic-gpu-ml_taurob_simulation \
+    fhtw-ros:ROS_DISTRO_taurob_simulation_LABEL \
     tmux
 
