@@ -8,6 +8,8 @@ VERSION=""   # supported versions: ["", "-gpu", "-gpu-ml"]
 CUDA="off"
 BASE="georgno/fhtw_taut:latest"
 echo "[***] Build hook running"
+sed -i "s/ROS_DISTRO/$ROS_DISTRO/" ./ros_entrypoint.sh
+
 docker build \
     --rm \
     --tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" \
@@ -15,5 +17,6 @@ docker build \
     --build-arg VERSION="$VERSION" \
     --build-arg CUDA="$CUDA" \
     --file Dockerfile .
-docker tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" "$BASE"-"$ROS_DISTRO"-"$LABEL"
-docker push "$BASE"-"$ROS_DISTRO"-"$LABEL"
+sed -i "s/$ROS_DISTRO/ROS_DISTRO/" ./ros_entrypoint.sh
+docker tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" "$BASE"-"$LABEL"
+docker push "$BASE"-"$LABEL"
