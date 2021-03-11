@@ -59,7 +59,7 @@ build()
         --build-arg VERSION="$VERSION" \
         --build-arg CUDA="$CUDA" \
         --file Dockerfile .
-        
+    DOCKER_BUILD_FLAG=$?
     # Changes in files depending on selected distro and version #
     sed -i "s/$ROS_DISTRO/ROS_DISTRO/" ./ros_entrypoint.sh || true
     if [ "$CUDA" == "on" ]; then
@@ -73,6 +73,11 @@ build()
         sed  -i "/--gpus all  \\\/d" ./run_docker.sh || true
     fi
     sed -i "s/fhtw-ros:ROS_DISTRO_taurob_simulation_LABEL/fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL"/" ./run_docker.sh || true
+
+    # Change Docker hook variables#
+    if [ $DOCKER_BUILD_FLAG -eq 0 ]; then
+        sed -i "s/LABEL=\"LABEL\"/LABEL=\"$LABEL\"/" ./hooks/build
+    fi
 
 }
 
