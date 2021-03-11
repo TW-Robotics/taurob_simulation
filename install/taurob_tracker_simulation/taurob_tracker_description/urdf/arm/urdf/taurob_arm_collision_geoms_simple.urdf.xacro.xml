@@ -99,7 +99,7 @@
     <collision>
       <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://taurob_tracker_description_sim/meshes/tgripper_link_1.stl"/>
+        <mesh filename="package://taurob_tracker_description/meshes/tgripper_link_1.stl"/>
       </geometry>
     </collision>
     -->    

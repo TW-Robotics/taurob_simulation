@@ -27,7 +27,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_0_detailed.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_0_detailed.stl"/>
         </geometry>
         <material name="DarkGrey">
           <color rgba="0.3 0.3 0.3 1"/>
@@ -58,7 +58,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_1.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_1.stl"/>
         </geometry>
         <material name="DarkGrey">
           <color rgba="0.3 0.3 0.3 1"/>
@@ -88,7 +88,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_2.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_2.stl"/>
         </geometry>
         <material name="DarkGrey">
           <color rgba="0.3 0.3 0.3 1"/>
@@ -167,7 +167,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_0_detailed.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_0_detailed.stl"/>
         </geometry>
         <material name="DarkGrey">
           <color rgba="0.3 0.3 0.3 1"/>
@@ -198,7 +198,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_1.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_1.stl"/>
         </geometry>
         <material name="DarkGrey">
           <color rgba="0.3 0.3 0.3 1"/>
@@ -228,7 +228,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_2.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_2.stl"/>
         </geometry>
         <material name="DarkGrey">
           <color rgba="0.3 0.3 0.3 1"/>
@@ -331,7 +331,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_3.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_3.stl"/>
         </geometry>
         <material name="DarkGrey">
           <color rgba="0.3 0.3 0.3 1"/>
@@ -388,7 +388,7 @@
         <!--       
         <origin xyz="0.0 0.0 0.0" rpy="0 0 ${M_PI}"/>
         <geometry>
-        <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/claw_base_link.stl"/>
+        <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/claw_base_link.stl"/>
         </geometry>
         -->
         
@@ -426,8 +426,8 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <!--<mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/gripper_geom.dae"/>-->
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tarm_link_4.stl"/>
+          <!--<mesh filename="package://taurob_tracker_description/urdf/arm/meshes/gripper_geom.dae"/>-->
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tarm_link_4.stl"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.5 0.5 0.5 1"/>
@@ -458,7 +458,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tgripper_link_1.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tgripper_link_1.stl"/>
         </geometry>
         <material name="White">
           <color rgba="1 1 1 1"/>
@@ -490,7 +490,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tgripper_link_2.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tgripper_link_2.stl"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.5 0.5 0.5 1"/>
@@ -518,7 +518,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tgripper_link_1.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tgripper_link_1.stl"/>
         </geometry>
         <material name="White">
           <color rgba="1 1 1 1"/>
@@ -550,7 +550,7 @@
       <visual>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://taurob_tracker_description_sim/urdf/arm/meshes/tgripper_link_2.stl"/>
+          <mesh filename="package://taurob_tracker_description/urdf/arm/meshes/tgripper_link_2.stl"/>
         </geometry>
         <material name="LightGrey">
           <color rgba="0.5 0.5 0.5 1"/>
