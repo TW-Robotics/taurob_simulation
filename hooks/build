@@ -18,5 +18,5 @@ docker build \
     --build-arg CUDA="$CUDA" \
     --file Dockerfile .
 sed -i "s/$ROS_DISTRO/ROS_DISTRO/" ./ros_entrypoint.sh
-docker tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" "$BASE"-"$ROS_DISTRO"-"$LABEL"
+docker tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" "$BASE"-"$LABEL"
 docker push "$BASE"-"$LABEL"
