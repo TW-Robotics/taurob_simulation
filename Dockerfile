@@ -72,18 +72,18 @@ USER root
 # Detection
 RUN sudo apt update && sudo apt install -y tesseract-ocr tesseract-ocr-deu libleptonica-dev libtesseract-dev python-catkin-tools
 # Openpose
-RUN sudo apt install -y libgoogle-glog-dev cuda-cublas* libatlas-base-dev libatlas3-base liblapacke-dev  build-essential graphviz libboost-filesystem-dev libboost-python-dev libboost-system-dev libboost-thread-dev libgflags-dev libgoogle-glog-dev \
+RUN if [ ${CUDA} == "on" ]; then sudo apt install -y libgoogle-glog-dev cuda-cublas* libatlas-base-dev libatlas3-base liblapacke-dev  build-essential graphviz libboost-filesystem-dev libboost-python-dev libboost-system-dev libboost-thread-dev libgflags-dev libgoogle-glog-dev \
     libhdf5-serial-dev libopenblas-dev python-virtualenv wget  libncurses5-dev libncursesw5-dev\
     apt-transport-https ca-certificates gnupg software-properties-common wget && wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null\ 
-    && sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main' && sudo apt update && sudo apt install -y cmake
+    && sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main' && sudo apt update && sudo apt install -y cmake; fi
 USER fhtw_user
-RUN cd /home/$USERNAME/git && git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose \
+RUN cd /home/$USERNAME/git && if [ ${CUDA} == "on" ]; then git clone https://github.com/CMU-Perceptual-Computing-Lab/openpose; fi \
     && git clone --recursive https://github.com/leggedrobotics/darknet_ros \
-    && cd openpose && git checkout tags/v1.7.0 && git submodule update --init --recursive --remote && mkdir build 
+    && if [ ${CUDA} == "on" ]; then cd openpose && git checkout tags/v1.7.0 && git submodule update --init --recursive --remote && mkdir build; fi
 # Manually set CUDA and NVCC Version to build openpose and 3d party libs
-RUN sed -i 's/-DCUDA_ARCH_NAME=${CUDA_ARCH}/-DCUDA_ARCH_NAME=Turing/g' /home/$USERNAME/git/openpose/CMakeLists.txt 
-RUN sed -i "/ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)/a   set(CUDA_gpu_detect_output 7.5)" /home/$USERNAME/git/openpose/cmake/Cuda.cmake
-RUN cd /home/$USERNAME/git/openpose && cd build && cmake .. && make -j && sudo make install
+RUN if [ ${CUDA} == "on" ]; then sed -i 's/-DCUDA_ARCH_NAME=${CUDA_ARCH}/-DCUDA_ARCH_NAME=Turing/g' /home/$USERNAME/git/openpose/CMakeLists.txt ; fi
+RUN if [ ${CUDA} == "on" ]; then sed -i "/ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)/a   set(CUDA_gpu_detect_output 7.5)" /home/$USERNAME/git/openpose/cmake/Cuda.cmake; fi
+RUN if [ ${CUDA} == "on" ]; then cd /home/$USERNAME/git/openpose && cd build && cmake .. && make -j && sudo make install; fi
 RUN git clone https://github.com/ravijo/ros_openpose /home/$USERNAME/catkin_ws/src/ros_openpose && sed -i "/find_package(OpenMP)/a   find_package(Threads REQUIRED)" /home/$USERNAME/catkin_ws/src/ros_openpose/CMakeLists.txt
 RUN cd /home/$USERNAME/catkin_ws/src/ && ln -s  /home/$USERNAME/git/darknet_ros /home/$USERNAME/catkin_ws/src/ && cd /home/$USERNAME/catkin_ws/ && rm -rf build devel \
     && /bin/bash -c "source /opt/ros/melodic/setup.bash; catkin build -c -DCMAKE_BUILD_TYPE=Release"; exit 0
