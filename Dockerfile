@@ -44,8 +44,8 @@ USER root
 #----------#
 # Set up Simulation Environment #
 RUN mkdir -p /home/$USERNAME/git/gazebo_sim && cd /home/$USERNAME/git/gazebo_sim \
-	&& git clone https://github.com/tu-darmstadt-ros-pkg/gazebo_ros_control_select_joints.git \
-	&& git clone https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
+    && git clone https://github.com/tu-darmstadt-ros-pkg/gazebo_ros_control_select_joints.git \
+    && git clone https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
 RUN cd /home/$USERNAME/catkin_ws/src && ln -s /home/$USERNAME/git/gazebo_sim/* . 
 
 # Set up taurob simulation 
@@ -57,7 +57,7 @@ RUN cd /home/ && sudo chown -R fhtw_user:fhtw_user $USERNAME
 USER fhtw_user
 RUN cd /home/$USERNAME/catkin_ws/ && rosdep install --from-paths src --ignore-src -r -y \ 
     && source /opt/ros/melodic/setup.bash && catkin_make; exit 0
-
+RUN echo 'alias sim_start="roscd taurob_tracker_bringup/scripts/ && bash ./start_sim.sh -s 2"' >> /home/${USERNAME}/.bash_aliases && echo 'echo -e "\e[32m To start the simulation execute: \n sim_start <args>          where args can be: -g ... starts gazebo gui | -b ... spawns objects in world \e[0m"' >> ~/.bashrc
 USER root
 COPY ./ros_entrypoint.sh /ros_entrypoint.sh
 RUN chmod +x /ros_entrypoint.sh

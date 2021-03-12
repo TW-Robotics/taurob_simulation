@@ -51,6 +51,7 @@ main(){
     fi
     path="$path".world
     echo "path= $path"
+    
 
     if [ "$CARTOGRAPHER" == "true" ]; then
         echo -e "\e[32mCurrently not implemented\e[0m"
