@@ -11,6 +11,7 @@ SIZE="1"
 OBSTACLES="false"
 GUI="false"
 GPU="false"
+POSE=[""]
 
 
 usage(){
@@ -41,6 +42,8 @@ main(){
             path="$path""fhtw"
         else
             path="$path""akw"
+            POSE="x_pos:=-2.384 y_pos:=-17.147 yaw:=3.1415"
+            POSE=($POSE)
         fi
     fi
     if [ "$OBSTACLES" == "true" ]; then 
@@ -61,9 +64,9 @@ main(){
         exit 0
     else
         echo -e "Using localhost as ROS_MASTER"
-        echo -e "\e[32mroslaunch taurob_tracker_bringup bringup.launch path_to_world:=$path gui:=$GUI outdoor:=$OUTDOOR gpu:=$GPU\e[0m"
+        echo -e "\e[32mroslaunch taurob_tracker_bringup bringup.launch path_to_world:=$path gui:=$GUI outdoor:=$OUTDOOR gpu:=$GPU ${POSE[@]}\e[0m"
         sleep 5
-        roslaunch taurob_tracker_bringup bringup.launch path_to_world:="$path" gui:="$GUI" outdoor:="$OUTDOOR" gpu:="$GPU" 
+        roslaunch taurob_tracker_bringup bringup.launch path_to_world:="$path" gui:="$GUI" outdoor:="$OUTDOOR" gpu:="$GPU" ${POSE[@]}
         cleanup
         exit 0
     fi
