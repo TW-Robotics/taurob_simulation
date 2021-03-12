@@ -1,26 +1,25 @@
 #!/bin/bash
-SOURCE_BRANCH="$(git symbolic-ref -q --short HEAD)"
-GIT_SHA1="$(git rev-parse -q HEAD)"
-
 ROS_DISTRO="melodic"    # supported versions: ["melodic"]
 LABEL="cpu"
 VERSION=""   # supported versions: ["", "-gpu", "-gpu-ml"]
 CUDA="off"
-BASE="georgno/fhtw-tracker-sim:latest"
+SOURCE_BRANCH="$(git symbolic-ref -q --short HEAD)"
+GIT_SHA1="$(git rev-parse -q HEAD)"
+DOCKER_REPO="georgno/fhtw-tracker-sim"
+DOCKER_TAG="latest-$LABEL"
+
+
 echo "[***] Build hook running"
 sed -i "s/ROS_DISTRO/$ROS_DISTRO/" ./ros_entrypoint.sh
 
-TAG_NAME="$ROS_DISTRO"_taurob_simulation_"$LABEL"
-PUSH_NAME="$BASE-$LABEL"
 echo "[***] TAG_NAME= $TAG_NAME"
 echo "[***] PUSH_NAME= $PUSH_NAME"
 docker build \
     --rm \
-    --tag fhtw-ros:"$TAG_NAME" \
+    --tag "$DOCKER_REPO:$DOCKER_TAG"\
     --build-arg ROS_DISTRO="$ROS_DISTRO" \
     --build-arg VERSION="$VERSION" \
     --build-arg CUDA="$CUDA" \
     --file Dockerfile .
 sed -i "s/$ROS_DISTRO/ROS_DISTRO/" ./ros_entrypoint.sh
-docker tag fhtw-ros:"$TAG_NAME" "$PUSH_NAME"
-docker push "$PUSH_NAME"
+docker push "$DOCKER_REPO:$DOCKER_TAG"
