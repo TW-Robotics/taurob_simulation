@@ -43,7 +43,7 @@ main(){
         else
             path="$path""akw"
             POSE="x_pos:=-2.384 y_pos:=-17.147 yaw:=3.1415"
-            POSE=($POSE)
+            IFS=" " read -r -a POSE <<< "$POSE"
         fi
     fi
     if [ "$OBSTACLES" == "true" ]; then 
@@ -64,9 +64,10 @@ main(){
         exit 0
     else
         echo -e "Using localhost as ROS_MASTER"
-        echo -e "\e[32mroslaunch taurob_tracker_bringup bringup.launch path_to_world:=$path gui:=$GUI outdoor:=$OUTDOOR gpu:=$GPU ${POSE[@]}\e[0m"
+        # shellcheck disable=SC2145   # I know how fixed_"$@" behaves and it's correct!
+        echo -e "\e[32mroslaunch taurob_tracker_bringup bringup.launch path_to_world:=$path gui:=$GUI outdoor:=$OUTDOOR gpu:=$GPU ${POSE[@]} \e[0m"
         sleep 5
-        roslaunch taurob_tracker_bringup bringup.launch path_to_world:="$path" gui:="$GUI" outdoor:="$OUTDOOR" gpu:="$GPU" ${POSE[@]}
+        roslaunch taurob_tracker_bringup bringup.launch path_to_world:="$path" gui:="$GUI" outdoor:="$OUTDOOR" gpu:="$GPU" "${POSE[@]}"
         cleanup
         exit 0
     fi

@@ -12,8 +12,7 @@ DOCKER_TAG="latest-$LABEL"
 echo "[***] Build hook running"
 sed -i "s/ROS_DISTRO/$ROS_DISTRO/" ./ros_entrypoint.sh
 
-echo "[***] TAG_NAME= $TAG_NAME"
-echo "[***] PUSH_NAME= $PUSH_NAME"
+echo "[***] PUSH_NAME= $DOCKER_REPO:$DOCKER_TAG"
 docker build \
     --rm \
     --tag "$DOCKER_REPO:$DOCKER_TAG"\
