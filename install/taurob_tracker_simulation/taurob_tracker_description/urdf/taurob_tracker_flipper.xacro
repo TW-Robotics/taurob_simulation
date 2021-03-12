@@ -206,7 +206,7 @@
   </xacro:taurob_camera>
   <xacro:taurob_camera_gazebo link_name="camera_link_front" camera_name="camera_front" rtsp_support="false" />
   <xacro:taurob_camera suffix="back" parent="chassis_link">
-    <origin xyz="-0.6 0.0 ${-tracker_base_size_z*0.5}" rpy="0 0 0" />
+    <origin xyz="-0.6 0.0 ${-tracker_base_size_z*0.5}" rpy="0 0 ${M_PI}" />
   </xacro:taurob_camera>
   <xacro:taurob_camera_gazebo link_name="camera_link_back" camera_name="camera_back" rtsp_support="false"/>
   <xacro:taurob_camera suffix="elevated" parent="camera_mount">
