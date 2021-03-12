@@ -7,18 +7,21 @@ SOURCE_BRANCH="$(git symbolic-ref -q --short HEAD)"
 GIT_SHA1="$(git rev-parse -q HEAD)"
 DOCKER_REPO="georgno/fhtw-tracker-sim"
 DOCKER_TAG="latest-$LABEL"
-
-
+IMAGE_NAME=$DOCKER_REPO:$DOCKER_TAG"
 echo "[***] Build hook running"
+echo "[***] Repo: $DOCKER_REPO"
+echo "[***] Tag: $DOCKER_TAG"
+echo "[***] Image: $IMAGE_NAME"
+
 sed -i "s/ROS_DISTRO/$ROS_DISTRO/" ./ros_entrypoint.sh
 
 echo "[***] PUSH_NAME= $DOCKER_REPO:$DOCKER_TAG"
 docker build \
     --rm \
-    --tag "$DOCKER_REPO:$DOCKER_TAG"\
+    --tag ${IMAGE_NAME}\
     --build-arg ROS_DISTRO="$ROS_DISTRO" \
     --build-arg VERSION="$VERSION" \
     --build-arg CUDA="$CUDA" \
     --file Dockerfile .
 sed -i "s/$ROS_DISTRO/ROS_DISTRO/" ./ros_entrypoint.sh
-docker push "$DOCKER_REPO:$DOCKER_TAG"
+docker push ${IMAGE_NAME}
