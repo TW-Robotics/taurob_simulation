@@ -10,13 +10,17 @@ BASE="georgno/fhtw-tracker-sim:latest"
 echo "[***] Build hook running"
 sed -i "s/ROS_DISTRO/$ROS_DISTRO/" ./ros_entrypoint.sh
 
+TAG_NAME="$ROS_DISTRO"_taurob_simulation_"$LABEL"
+PUSH_NAME="$BASE-$LABEL"
+echo "[***] TAG_NAME= $TAG_NAME"
+echo "[***] PUSH_NAME= $PUSH_NAME"
 docker build \
     --rm \
-    --tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" \
+    --tag fhtw-ros:"$TAG_NAME" \
     --build-arg ROS_DISTRO="$ROS_DISTRO" \
     --build-arg VERSION="$VERSION" \
     --build-arg CUDA="$CUDA" \
     --file Dockerfile .
 sed -i "s/$ROS_DISTRO/ROS_DISTRO/" ./ros_entrypoint.sh
-docker tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" "$BASE-$LABEL"
-docker push "$BASE-$LABEL"
+docker tag fhtw-ros:"$TAG_NAME" "$PUSH_NAME"
+docker push "$PUSH_NAME"
