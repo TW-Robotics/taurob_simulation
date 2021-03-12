@@ -26,6 +26,6 @@ docker run \
     --privileged \
     --net=host \
     --name="taurob_sim" \
-    georgno/fhtw-tracker-sim:latest-cpu \
+    georgno/fhtw-tracker-sim:cpu \
     tmux
 

@@ -54,7 +54,7 @@ build()
     docker pull georgno/fhtw-ros:"$ROS_DISTRO""$VERSION"
     docker build \
         --rm \
-        --tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" \
+        --tag georgno/fhtw-ros:"$LABEL" \
         --build-arg ROS_DISTRO="$ROS_DISTRO" \
         --build-arg VERSION="$VERSION" \
         --build-arg CUDA="$CUDA" \
@@ -72,7 +72,7 @@ build()
         echo -e "\e[32mBuild without CUDA support\e[0m"
         sed  -i "/--gpus all  \\\/d" ./run_docker.sh || true
     fi
-    sed -i "s/fhtw-ros:ROS_DISTRO_taurob_simulation_LABEL/fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL"/" ./run_docker.sh || true
+    sed -i "s/georgno\/fhtw-ros:LABEL/georgno\/fhtw-ros:$LABEL/" ./run_docker.sh || true
 
     # Change Docker hook variables#
     if [ $DOCKER_BUILD_FLAG -eq 0 ]; then

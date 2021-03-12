@@ -26,6 +26,6 @@ docker run \
     --privileged \
     --net=host \
     --name="taurob_sim" \
-    fhtw-ros:melodic_taurob_simulation_cpu \
+    georgno/fhtw-ros:LABEL \
     tmux
 
