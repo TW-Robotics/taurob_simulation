@@ -915,27 +915,7 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='chair'>
-        <pose>-26.1938 -7.63357 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='body'>
-          <pose>-26.1938 -7.63357 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='chair_clone'>
-        <pose>-0.807255 20.3003 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='body'>
-          <pose>-0.807255 20.3003 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='coffee_table'>
+      <model name='cafe_table'>
         <pose>-26.6049 -8.82448 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='body'>
@@ -945,7 +925,7 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='coffee_table_clone'>
+      <model name='cafe_table_clone'>
         <pose>-1.29794 18.9932 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='body'>
@@ -8199,7 +8179,7 @@
           <pose>0 0 0.02 0.04 -0 1.57</pose>
           <geometry>
             <mesh>
-              <uri>model://person_standing/meshes/standingv2.dae</uri>
+              <uri>model://person_standing/meshes/standing.dae</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -8220,7 +8200,7 @@
           <pose>0 0 0.02 0.04 -0 1.57</pose>
           <geometry>
             <mesh>
-              <uri>model://person_standing/meshes/standingv2.dae</uri>
+              <uri>model://person_standing/meshes/standing.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -8269,7 +8249,7 @@
           <pose>0 0 0.02 0.04 -0 1.57</pose>
           <geometry>
             <mesh>
-              <uri>model://person_standing/meshes/standingv2.dae</uri>
+              <uri>model://person_standing/meshes/standing.dae</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -8290,7 +8270,7 @@
           <pose>0 0 0.02 0.04 -0 1.57</pose>
           <geometry>
             <mesh>
-              <uri>model://person_standing/meshes/standingv2.dae</uri>
+              <uri>model://person_standing/meshes/standing.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -8339,7 +8319,7 @@
           <pose>0 0 0.02 0.04 -0 1.57</pose>
           <geometry>
             <mesh>
-              <uri>model://person_standing/meshes/standingv2.dae</uri>
+              <uri>model://person_standing/meshes/standing.dae</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -8360,7 +8340,7 @@
           <pose>0 0 0.02 0.04 -0 1.57</pose>
           <geometry>
             <mesh>
-              <uri>model://person_standing/meshes/standingv2.dae</uri>
+              <uri>model://person_standing/meshes/standing.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -8409,7 +8389,7 @@
           <pose>0 0 0.02 0.04 -0 1.57</pose>
           <geometry>
             <mesh>
-              <uri>model://person_standing/meshes/standingv2.dae</uri>
+              <uri>model://person_standing/meshes/standing.dae</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -8430,7 +8410,7 @@
           <pose>0 0 0.02 0.04 -0 1.57</pose>
           <geometry>
             <mesh>
-              <uri>model://person_standing/meshes/standingv2.dae</uri>
+              <uri>model://person_standing/meshes/standing.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -8479,7 +8459,7 @@
           <pose>0 0 0.02 0.04 -0 1.57</pose>
           <geometry>
             <mesh>
-              <uri>model://person_standing/meshes/standingv2.dae</uri>
+              <uri>model://person_standing/meshes/standing.dae</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -8500,7 +8480,7 @@
           <pose>0 0 0.02 0.04 -0 1.57</pose>
           <geometry>
             <mesh>
-              <uri>model://person_standing/meshes/standingv2.dae</uri>
+              <uri>model://person_standing/meshes/standing.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -8510,7 +8490,7 @@
       </link>
       <pose>24.4432 20.106 0 0 -0 0</pose>
     </model>
-    <model name='coffee_table'>
+    <model name='cafe_table'>
       <static>1</static>
       <pose>-26.6049 -8.82448 0 0 -0 0</pose>
       <link name='body'>
@@ -8529,7 +8509,7 @@
         <collision name='collision'>
           <geometry>
             <mesh>
-              <uri>model://coffee_table/meshes/coffee_table.dae</uri>
+              <uri>model://cafe_table/meshes/cafe_table.dae</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -8549,7 +8529,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>model://coffee_table/meshes/coffee_table.dae</uri>
+              <uri>model://cafe_table/meshes/cafe_table.dae</uri>
             </mesh>
           </geometry>
         </visual>
@@ -8558,7 +8538,7 @@
         <kinematic>0</kinematic>
       </link>
     </model>
-    <model name='coffee_table_clone'>
+    <model name='cafe_table_clone'>
       <static>1</static>
       <pose>-1.29794 18.9932 0 0 -0 0</pose>
       <link name='body'>
@@ -8577,7 +8557,7 @@
         <collision name='collision'>
           <geometry>
             <mesh>
-              <uri>model://coffee_table/meshes/coffee_table.dae</uri>
+              <uri>model://cafe_table/meshes/cafe_table.dae</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -8597,103 +8577,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>model://coffee_table/meshes/coffee_table.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-    </model>
-    <model name='chair'>
-      <static>1</static>
-      <pose>-26.1938 -7.63357 0 0 -0 0</pose>
-      <link name='body'>
-        <inertial>
-          <mass>5</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <iyy>1</iyy>
-            <ixz>0</ixz>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-          <pose>0 0 0 0 -0 0</pose>
-        </inertial>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>model://chair/meshes/chair.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://chair/meshes/chair.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-    </model>
-    <model name='chair_clone'>
-      <static>1</static>
-      <pose>-0.807255 20.3003 0 0 -0 0</pose>
-      <link name='body'>
-        <inertial>
-          <mass>5</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <iyy>1</iyy>
-            <ixz>0</ixz>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-          <pose>0 0 0 0 -0 0</pose>
-        </inertial>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>model://chair/meshes/chair.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://chair/meshes/chair.dae</uri>
+              <uri>model://cafe_table/meshes/cafe_table.dae</uri>
             </mesh>
           </geometry>
         </visual>
