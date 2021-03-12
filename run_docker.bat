@@ -1,8 +1,8 @@
 @echo off
-if "%1"==""(
-    VERSION=%1
-) else(
-        VERSION="cpu"
+if %1.==. (  
+    set VERSION=cpu
+) else (
+    set VERSION=%1
 )
 echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo +Make sure you have a X11 server runing                                +
@@ -13,10 +13,9 @@ set DISPLAY=%NetworkIP%:0.0
 echo +DISPLAY=%DISPLAY%                                                 +
 set pfad=%CD%\catkin_ws\src\
 echo +Path to catkin_ws=%pfad%
+echo Version= %VERSION%
 echo ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-
-docker run -it --rm --network bridge  -p 5000:5000 --mount type=bind,source="%pfad%\",target=/home/fhtw_user/catkin_ws/src/fhtw/ --name "taurob_sim" --privileged -e DISPLAY=%DISPLAY%  "georgno/fhtw-tracker-sim:%VERSION%" "tmux"
+set REPO=georgno/fhtw-tracker-sim:%VERSION%
+docker run -it --rm --network bridge  -p 5000:5000 --mount type=bind,source="%pfad%\",target=/home/fhtw_user/catkin_ws/src/fhtw/ --name "taurob_sim" --privileged -e DISPLAY=%DISPLAY%  %REPO% "tmux"
 
 cmd /k
