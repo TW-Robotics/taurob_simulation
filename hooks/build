@@ -24,4 +24,5 @@ docker build \
     --build-arg CUDA="$CUDA" \
     --file Dockerfile .
 sed -i "s/$ROS_DISTRO/ROS_DISTRO/" ./ros_entrypoint.sh
+docker tag ${DOCKER_TAG} ${IMAGE_NAME}
 docker push ${IMAGE_NAME}
