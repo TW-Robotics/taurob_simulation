@@ -1,8 +1,8 @@
 #!/bin/bash
 ROS_DISTRO="melodic"    # supported versions: ["melodic"]
-LABEL="cpu"
-VERSION=""   # supported versions: ["", "-gpu", "-gpu-ml"]
-CUDA="off"
+LABEL="gpu"
+VERSION="-gpu-ml"   # supported versions: ["", "-gpu", "-gpu-ml"]
+CUDA="on"
 SOURCE_BRANCH="$(git symbolic-ref -q --short HEAD)"
 GIT_SHA1="$(git rev-parse -q HEAD)"
 DOCKER_REPO="georgno/fhtw-tracker-sim"
