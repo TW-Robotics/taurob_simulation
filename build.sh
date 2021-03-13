@@ -1,6 +1,6 @@
 #!/bin/bash
 
-usage() 
+usage()
 {
     printf "Usage: \n\t%s [-v <cpu | gpu (default)> ] [-h print this message]\n" "$0" 1>&2
     exit 1
@@ -9,6 +9,7 @@ usage()
 ROS_DISTRO="melodic" # supported versions: ["melodic"]
 VERSION="-gpu-ml"       # supported versions: ["", "gpu", "-gpu-ml"]
 LABEL="gpu"
+REPO="georgno/fhtw_taut"
 opts="v:h"
 
 while getopts ${opts} arg; do
@@ -41,7 +42,7 @@ done
 
 
 
-build() 
+build()
 {
     if [ "$CUDA" == "on" ]; then
         echo "Building with CUDA support"
@@ -54,7 +55,7 @@ build()
     docker pull georgno/fhtw-ros:"$ROS_DISTRO""$VERSION"
     docker build \
         --rm \
-        --tag fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL" \
+        --tag $REPO:$LABEL \
         --build-arg ROS_DISTRO="$ROS_DISTRO" \
         --build-arg VERSION="$VERSION" \
         --build-arg CUDA="$CUDA" \
@@ -72,7 +73,7 @@ build()
         echo -e "\e[32mBuild without CUDA support\e[0m"
         sed  -i "/--gpus all  \\\/d" ./run_docker.sh || true
     fi
-    sed -i "s/fhtw-ros:ROS_DISTRO_taurob_simulation_LABEL/fhtw-ros:"$ROS_DISTRO"_taurob_simulation_"$LABEL"/" ./run_docker.sh || true
+    sed -i "s/georgno\/fhtw_taut:LABEL/georgno\/fhtw_taut:$LABEL/" ./run_docker.sh || true
 
     # Change Docker hook variables#
     if [ $DOCKER_BUILD_FLAG -eq 0 ]; then
@@ -80,10 +81,10 @@ build()
         sed -i "s/VERSION=\"VERSION\"/VERSION=\"$VERSION\"/" ./hooks/build
         sed -i "s/CUDA=\"CUDA\"/CUDA=\"$CUDA\"/" ./hooks/build
     fi
-    
+
 }
 
-main() 
+main()
 {
     build
 }

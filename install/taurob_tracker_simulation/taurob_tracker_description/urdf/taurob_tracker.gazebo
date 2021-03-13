@@ -56,8 +56,8 @@
       <velocitydrift>0 0 0</velocitydrift>
       <velocitygaussiannoise>0.1 0.1 0.1</velocitygaussiannoise>
 
-      <referenceLatitude>48.1360478</referenceLatitude>
-      <referenceLongitude>16.3148094</referenceLongitude>
+      <referenceLatitude>48.354717</referenceLatitude>
+      <referenceLongitude>15.884882</referenceLongitude>
       <referenceAltitude>250</referenceAltitude>
     </plugin>
   </gazebo>

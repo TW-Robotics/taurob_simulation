@@ -24,8 +24,9 @@ docker run \
     --env="DISPLAY=${DISPLAY}" \
     --env="USER_ID=$USER_ID" \
     --privileged \
+	--gpus all  \
     --net=host \
     --name="taurob_sim" \
-    fhtw-ros:melodic_taurob_simulation_cpu \
+    georgno/fhtw_taut:gpu \
     tmux
 
