@@ -8,7 +8,11 @@ VOLUMES="--volume=$XSOCK:$XSOCK:rw
          --volume=$XAUTH:$XAUTH:rw
          --volume=$SHARED_HOST_DIR:$SHARED_DOCKER_DIR:rw"
 
-
+if [ -z $1  ]; then
+    LABEL=cpu
+else
+    LABEL=gpu
+fi
 mkdir -p "$SHARED_HOST_DIR"
 
 
@@ -26,6 +30,6 @@ docker run \
     --privileged \
     --net=host \
     --name="taurob_sim" \
-    georgno/fhtw-ros:LABEL \
+    georgno/fhtw-tracker-sim:$LABEL \
     tmux
 
