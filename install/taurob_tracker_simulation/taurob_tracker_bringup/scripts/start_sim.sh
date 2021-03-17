@@ -11,6 +11,7 @@ SIZE="1"
 OBSTACLES="false"
 GUI="false"
 GPU="false"
+POSE=[""]
 
 
 usage(){
@@ -41,6 +42,8 @@ main(){
             path="$path""fhtw"
         else
             path="$path""akw"
+            POSE="x_pos:=-2.384 y_pos:=-17.147 yaw:=3.1415"
+            IFS=" " read -r -a POSE <<< "$POSE"
         fi
     fi
     if [ "$OBSTACLES" == "true" ]; then 
@@ -48,22 +51,18 @@ main(){
     fi
     path="$path".world
     echo "path= $path"
-
-    if [ "$CARTOGRAPHER" == "true" ]; then
+        if [ "$CARTOGRAPHER" == "true" ]; then
         echo -e "\e[32mCurrently not implemented\e[0m"
         # echo -e "Using Cartographer docker image as ROS_MASTER"
         # gnome-terminal --tab -e 'docker run -it --rm --name fhtw_cartographer fhtw/cartographer:latest roslaunch cartographer_ros 2d_slamming.launch'  > /dev/null 2>&1
-        # sleep 2
-        # setupDockerROS
-        # echo -e "\e[32mroslaunch taurob_tracker_bringup bringup.launch path_to_world:="$path" gui:="$GUI" outdoor:="$OUTDOOR"\e[0m"
-        # roslaunch taurob_tracker_bringup bringup.launch path_to_world:="$path" gui:="$GUI" outdoor:="$OUTDOOR" --wait
         cleanup
         exit 0
     else
         echo -e "Using localhost as ROS_MASTER"
-        echo -e "\e[32mroslaunch taurob_tracker_bringup bringup.launch path_to_world:=$path gui:=$GUI outdoor:=$OUTDOOR gpu:=$GPU\e[0m"
-        sleep 5
-        roslaunch taurob_tracker_bringup bringup.launch path_to_world:="$path" gui:="$GUI" outdoor:="$OUTDOOR" gpu:="$GPU" 
+        # shellcheck disable=SC2145   # I know how fixed_"$@" behaves and it's correct!
+        echo -e "\e[32mroslaunch taurob_tracker_bringup bringup.launch path_to_world:=$path gui:=$GUI outdoor:=$OUTDOOR gpu:=$GPU ${POSE[@]} \e[0m"
+        for i in 5 4 3 2 1; do echo -ne "Starting in $i seconds \033[0K\r" ; sleep 1; done
+        roslaunch taurob_tracker_bringup bringup.launch path_to_world:="$path" gui:="$GUI" outdoor:="$OUTDOOR" gpu:="$GPU" "${POSE[@]}"
         cleanup
         exit 0
     fi
